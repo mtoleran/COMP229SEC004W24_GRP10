@@ -1,9 +1,13 @@
 import express from 'express'
+import appointmentCtrl from '../controllers/appointment.controller.js';
+
 // import userCtrl from '../controllers/user.controller.js' 
 // import authCtrl from '../controllers/auth.controller'
  //import authCtrl from '../controllers/auth.controller.js'
 
  const router = express.Router()
+ router.route('/api/appointments').post(appointmentCtrl.create)
+ router.route('/api/appointments').get(appointmentCtrl.list);
 //  router.route('/api/users').post(userCtrl.create)
 //  router.route('/api/users').get(userCtrl.list)
 //  router.route('/api/users/:userId')
