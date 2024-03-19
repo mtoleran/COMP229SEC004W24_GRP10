@@ -7,6 +7,7 @@ import helmet from 'helmet'
 import Template from './../template.js'
 import clinicRoutes from './routes/clinic.routes.js'
 //import authRoutes from './routes/auth.routes.js'
+
 import path from 'path'
 const app = express()
 const CURRENT_WORKING_DIR = process.cwd()

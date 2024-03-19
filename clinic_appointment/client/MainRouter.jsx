@@ -1,7 +1,7 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 import Home from './core/Home'
-import Appointments from './appointment/Appointments.jsx'
+import Appointments from './appointment/BookAppointments.jsx'
 import Menu from './core/Menu'
 
 function MainRouter() {
