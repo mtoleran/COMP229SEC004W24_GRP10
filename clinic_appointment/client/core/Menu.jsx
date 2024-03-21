@@ -32,6 +32,11 @@ export default function Menu(){
           Appointments
           </Button>
       </Link>
+      <Link to="/schedule">
+        <Button component={Link} to="/schedule" style={isActive("/schedule")}>
+          Schedule
+          </Button>
+      </Link>
       {/* {
         !auth.isAuthenticated() && (<span>
           <Link to="/signup">

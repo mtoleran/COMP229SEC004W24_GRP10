@@ -41,7 +41,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
-export default function ListAppointments() {
+export default function ViewAppointments() {
     const [appointments, setList] = useState([])
     useEffect(() => {
         const abortController = new AbortController()
