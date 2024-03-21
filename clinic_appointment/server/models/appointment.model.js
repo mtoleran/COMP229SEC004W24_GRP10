@@ -12,10 +12,10 @@ const AppointmentSchema = new mongoose.Schema({
         required: 'Last Name is required'
     },
     date: {
-        type: Date//,required: 'Date is required'
+        type: String//,required: 'Date is required'
     },
     time: {
-        type: Date,
+        type: String,
         trim: true//,required: 'Time is required'
     },
     procedure: {

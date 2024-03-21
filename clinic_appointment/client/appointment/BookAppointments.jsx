@@ -1,4 +1,3 @@
-
 /**import React from 'react'
 import { useState } from 'react'
 import { useEffect } from 'react'
@@ -98,7 +97,6 @@ export default function Users() {
 
  */
 
-
 import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
@@ -114,10 +112,12 @@ import {
   DialogContent,
   DialogContentText,
   DialogActions,
+  Select,
+  MenuItem,
+  ListItemText,
 } from "@material-ui/core";
 import PropTypes from "prop-types";
 import { create } from "./api-appointment";
-
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -130,6 +130,11 @@ const useStyles = makeStyles((theme) => ({
   textField: {
     width: "100%",
     marginBottom: theme.spacing(2),
+  },
+  selectField:{
+    width: "100%",
+    marginTop: theme.spacing(2),
+    marginBottom: theme.spacing(1),
   },
   error: {
     color: "red",
@@ -149,7 +154,7 @@ export default function AddAppointment() {
     firstName: "",
     lastName: "",
     date: "",
-    time: "",
+    time: "Select Time",
     procedure: "",
     dentist: "",
   });
@@ -165,12 +170,12 @@ export default function AddAppointment() {
 
   const clickSubmit = async () => {
     const appointment = {
-      firstName: values.firstName|| undefined,
-      lastName: values.lastName|| undefined,
-      date: values.date|| undefined,
-      time: values.time|| undefined,
-      procedure: values.procedure|| undefined,
-      dentist: values.dentist|| undefined,
+      firstName: values.firstName || undefined,
+      lastName: values.lastName || undefined,
+      date: values.date || undefined,
+      time: values.time || undefined,
+      procedure: values.procedure || undefined,
+      dentist: values.dentist || undefined,
     };
     create(appointment).then((data) => {
       if (data.error) {
@@ -218,14 +223,36 @@ export default function AddAppointment() {
             onChange={handleChange("date")}
             margin="normal"
           />
-          <TextField
+          <Select
             id="time"
             label="Time"
-            className={classes.textField}
             value={values.time}
             onChange={handleChange("time")}
+            className={classes.selectField}
             margin="normal"
-          />
+            renderValue={(selected) => (
+              <ListItemText
+                primary={selected}
+                style={{
+                  color: selected === "Select Time" ? "#757575" : "#000000",
+                  textAlign: "left",
+                }}
+              />
+            )}
+          >
+            <MenuItem value="Select Time" disabled>
+              Select Time
+            </MenuItem>
+            <MenuItem value="09:00 AM">09:00 AM</MenuItem>
+            <MenuItem value="10:00 AM">10:00 AM</MenuItem>
+            <MenuItem value="11:00 AM">11:00 AM</MenuItem>
+            <MenuItem value="12:00 PM">12:00 PM</MenuItem>
+            <MenuItem value="01:00 PM">01:00 PM</MenuItem>
+            <MenuItem value="02:00 PM">02:00 PM</MenuItem>
+            <MenuItem value="03:00 PM">03:00 PM</MenuItem>
+            <MenuItem value="04:00 PM">04:00 PM</MenuItem>
+            <MenuItem value="05:00 PM">05:00 PM</MenuItem>
+          </Select>
           <TextField
             id="procedure"
             label="Procedure"
@@ -269,7 +296,7 @@ export default function AddAppointment() {
               variant="contained"
               onClick={handleClose}
             >
-              Sign In
+              Close
             </Button>
           </Link>
         </DialogActions>
