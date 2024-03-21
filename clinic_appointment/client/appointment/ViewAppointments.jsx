@@ -1,6 +1,3 @@
-
-
-
 import React from 'react'
 import { useState } from 'react'
 import { useEffect } from 'react'
@@ -68,19 +65,23 @@ export default function ViewAppointments() {
             </Typography>
             <List dense>
                 {appointments.map((item, i) => {
-                    return <Link component={RouterLink} to={"/user/" + item._id} key={i}>
+                    return <Link component={RouterLink} to={"/appointment/" + item._id} key={i}>
 
                         <ListItem button>
                             <ListItemAvatar>
                                 <Avatar>
                                 </Avatar>
                             </ListItemAvatar>
-                            <ListItemText primary={item.name} />
-                            <ListItemSecondaryAction>
-                                <IconButton>
-                                    <ArrowForward />
-                                </IconButton>
-                            </ListItemSecondaryAction>
+                            <ListItemText 
+                                primary={"Patient Name: " + item.firstName + " " + item.lastName} 
+                                secondary= {"Date: " + item.date + " Time: " + item.time}  
+                            />
+                            <ListItemText 
+                                primary={"Procedure: " + item.procedure} 
+                            />
+                            <ListItemText 
+                                primary={"Status: " + item.status} 
+                            />
                         </ListItem>
                     </Link>
                 })}
