@@ -9,8 +9,8 @@ import Button from '@material-ui/core/Button'
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 
 
-const isActive = (location, path) => {
-  return location.pathname === path ? { color: '#ff4081' } : { color: '#ffffff' };
+const isActive = (...paths) => {
+  return paths.some((path) => location.pathname === path) ? { color: '#ff4081' } : { color: '#ffffff' };
 };
 export default function Menu(){ 
   const navigate = useNavigate();
@@ -28,7 +28,9 @@ export default function Menu(){
         </IconButton>
       </Link>
       <Link to="/appointments">
-        <Button style={isActive(location, "/appointments")}>Appointments</Button>
+        <Button component={Link} to="/appointments" style={isActive("/appointments", "/add-appointment")}>
+          Appointments
+          </Button>
       </Link>
       {/* {
         !auth.isAuthenticated() && (<span>
