@@ -7,7 +7,7 @@ const create = async (req, res) => {
         await appointment.save();
         return res.status(200).json({ 
             message: "Successfully Added!",
-            appointment: appointment
+            Appointment: appointment
         });
     } catch (err) {
         return res.status(400).json({
@@ -27,4 +27,20 @@ const list = async (req, res) => {
     } 
 };
 
-export default { create, list };
+const deleteAppointmentById = async (req, res) => {
+    const appointmentId = req.params.id;
+  
+    try {
+      const deletedAppointment = await Appointment.findByIdAndDelete(appointmentId);
+  
+      if (!deletedAppointment) {
+        return res.status(404).json({ message: 'Appointment not found' });
+      }
+  
+      res.json({ message: 'Appointment deleted successfully' });
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
+  };
+  
+export default { create, list, deleteAppointmentById };
