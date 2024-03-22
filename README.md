@@ -77,7 +77,7 @@ Demo Video at <a href="https://www.youtube.com/watch?v=QkgonLKARNA">GIT ADD, COM
 
 4. GitHub MERGE PULL to MASTER (Main) Branch
 
-Demo Video at <a href="(https://www.youtube.com/watch?v=-ji0U7W9hhU">GitHub MERGE PULL to MASTER (Main) Branch (Kagemane10, YouTube)</a>
+Demo Video at <a href="https://www.youtube.com/watch?v=-ji0U7W9hhU">GitHub MERGE PULL to MASTER (Main) Branch (Kagemane10, YouTube)</a>
 
 #### Do NOT Delete your own Branch even after MERGING to MASTER (Main) Branch!!!
 
