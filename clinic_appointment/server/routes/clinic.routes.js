@@ -9,6 +9,7 @@ import appointmentCtrl from '../controllers/appointment.controller.js';
  router.route('/api/appointments').post(appointmentCtrl.create)
  router.route('/api/schedule').get(appointmentCtrl.list);
  router.route('/api/appointments/:id').delete(appointmentCtrl.deleteAppointmentById);
+ router.route('/api/appointments/:id').put(appointmentCtrl.updateAppointmentById)
 //  router.route('/api/users').post(userCtrl.create)
 //  router.route('/api/users').get(userCtrl.list)
 //  router.route('/api/users/:userId')
