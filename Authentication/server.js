@@ -19,9 +19,9 @@ mongoose.connect('mongodb://localhost:27017/dental-booking', { useNewUrlParser: 
 // Define route for signup
 app.post('/signup', async (req, res) => {
     try {
-        const { username, password } = req.body;
+        const { firstName, lastName, dateOfBirth, gender, contactNumber, email, password } = req.body;
         const hashedPassword = await bcrypt.hash(password, 10);
-        const user = new User({ username, password: hashedPassword });
+        const user = new User({ firstName, lastName, dateOfBirth, gender, contactNumber, email, password: hashedPassword });
         await user.save();
         res.status(201).json({ message: 'User created successfully' });
     } catch (err) {
@@ -32,14 +32,14 @@ app.post('/signup', async (req, res) => {
 // Define route for login
 app.post('/login', async (req, res) => {
     try {
-        const { username, password } = req.body;
-        const user = await User.findOne({ username });
+        const { email, password } = req.body;
+        const user = await User.findOne({ email });
         if (!user) {
-            return res.status(401).json({ error: 'Invalid username or password' });
+            return res.status(401).json({ error: 'Invalid email or password' });
         }
         const passwordMatch = await bcrypt.compare(password, user.password);
         if (!passwordMatch) {
-            return res.status(401).json({ error: 'Invalid username or password' });
+            return res.status(401).json({ error: 'Invalid email or password' });
         }
         const token = jwt.sign({ userId: user._id }, 'secret_key'); // Replace 'secret_key' with your actual secret key
         res.json({ token });
