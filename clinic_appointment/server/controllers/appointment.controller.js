@@ -41,6 +41,26 @@ const deleteAppointmentById = async (req, res) => {
     } catch (error) {
       res.status(500).json({ message: error.message });
     }
-  };
+};
+
+const updateAppointmentById = async (req, res) => {
+    const appointmentId = req.params.id;
+    const { firstName, lastName, date, time, procedure, dentist } = req.body;
   
-export default { create, list, deleteAppointmentById };
+    try {
+        const updatedAppointment = await Appointment.findByIdAndUpdate(appointmentId,
+          {  firstName, lastName, date, time, procedure, dentist  },
+          { new: true }
+        );
+    
+        if (!updatedAppointment) {
+          return res.status(404).json({ message: 'Appointment not found' });
+        }
+    
+        res.json(updatedAppointment);
+      } catch (error) {
+        res.status(500).json({ message: error.message });
+      }
+    };
+  
+export default { create, list, deleteAppointmentById, updateAppointmentById };
