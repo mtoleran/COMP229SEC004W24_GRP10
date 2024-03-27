@@ -6,6 +6,8 @@ import cors from 'cors'
 import helmet from 'helmet'
 import Template from './../template.js'
 import clinicRoutes from './routes/clinic.routes.js'
+import userRoutes from "./routes/user.routes.js"
+import authRoutes from "./routes/auth.routes.js"
 //import authRoutes from './routes/auth.routes.js'
 
 import path from 'path'
@@ -19,8 +21,9 @@ const CURRENT_WORKING_DIR = process.cwd()
 app.use('/dist', express.static(path.join(CURRENT_WORKING_DIR, 'dist')))
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use("/", userRoutes)
 app.use('/', clinicRoutes)
-//app.use('/', authRoutes)
+app.use('/', authRoutes)
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cookieParser())
