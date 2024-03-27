@@ -29,12 +29,12 @@ export default function Menu(){
       </Link>
       <Link to="/appointments">
         <Button component={Link} to="/appointments" style={isActive("/appointments", "/add-appointment")}>
-          Appointments
+          Book Appointments
           </Button>
       </Link>
       <Link to="/schedule">
         <Button component={Link} to="/schedule" style={isActive("/schedule")}>
-          Schedule
+          My Appointments
           </Button>
       </Link>
       {/* {
