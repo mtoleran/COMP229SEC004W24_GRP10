@@ -25,27 +25,39 @@ const UserSchema = new mongoose.Schema({
     },
     birthday: {
         type: String,
-        required: 'Birthday is required'
+        required: [function() {
+            return this.usertype === 'patient';
+        }, 'Birthday is required for patients'],
     },
     age: {
         type: Number,
-        required: 'Age is required'
+        required: [function() {
+            return this.usertype === 'patient';
+        }, 'Age is required for patients'],
     },
     gender: {
         type: String,
-        required: 'Gender is required'
+        required: [function() {
+            return this.usertype === 'patient';
+        }, 'Gender is required for patients'],
     },
     contactNumber: {
         type: String,
-        required: 'Contact Number is required'
+        required: [function() {
+            return this.usertype === 'patient';
+        }, 'Contact Number is required for patients'],
     },
     address: {
         type: String,
-        required: 'Address is required'
+        required: [function() {
+            return this.usertype === 'patient';
+        }, 'Address is required for patients'],
     },
     allergies: {
         type: String,
-        required: 'Allergies is required'
+        required: [function() {
+            return this.usertype === 'patient';
+        }, 'Allergies is required for patients'],
     },
     created: {
         type: Date,
