@@ -42,9 +42,9 @@ const InitialPage = () => {
             Signup
             </Button>
         </Link>
-        <Link to="/login">
+        <Link to="/signin">
             <Button color="primary" variant="contained" className={classes.button}>
-                Login
+                Signin
             </Button>
         </Link>
         <Link to="/add-appointment">

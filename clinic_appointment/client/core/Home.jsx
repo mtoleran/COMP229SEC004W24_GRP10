@@ -92,12 +92,12 @@ export default function Home() {
                     <div>
                         <Link to="/signup"> 
                             <Button color="primary" variant="contained" className={classes.button}>
-                                Signup
+                                Sign-up
                             </Button>
                         </Link>
-                        <Link to="/login">
+                        <Link to="/signin">
                             <Button color="primary" variant="contained" className={classes.button}>
-                                Login
+                                Sign-in
                             </Button>
                         </Link>
                     </div>
