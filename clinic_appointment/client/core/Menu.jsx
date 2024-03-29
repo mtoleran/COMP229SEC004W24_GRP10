@@ -5,7 +5,7 @@ import Typography from '@material-ui/core/Typography'
 import IconButton from '@material-ui/core/IconButton'
 import HomeIcon from '@material-ui/icons/Home'
 import Button from '@material-ui/core/Button'
-//import auth from '../lib/auth-helper'
+import auth from '../signin/auth-helper'
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 
 
@@ -32,33 +32,32 @@ export default function Menu(){
           Book Appointments
           </Button>
       </Link>
-      <Link to="/schedule">
+      {/* <Link to="/schedule">
         <Button component={Link} to="/schedule" style={isActive("/schedule")}>
           My Appointments
           </Button>
-      </Link>
-      {/* {
+      </Link> */}
+      {
         !auth.isAuthenticated() && (<span>
-          <Link to="/signup">
-            <Button style={isActive(location, "/signup")}>Sign up
-            </Button>
-          </Link>
-          <Link to="/signin">
-            <Button style={isActive(location, "/signin")}>Sign In
-            </Button>
-          </Link>
+          {/* Links to show when signed in */}
         </span>)
-      } */}
-      {/* {
+      }
+      {
         auth.isAuthenticated() && (<span>
-          <Link to={"/user/" + auth.isAuthenticated().user._id}>
-            <Button style={isActive(location, "/user/" + auth.isAuthenticated().user._id)}>My Profile</Button>
+          {/* Links to show when signed in */}
+          <Link to="/schedule">
+            <Button style={isActive(location, "/schedule")}>My Appointments
+            </Button>
+          </Link>
+          <Link to="/add-appointment">
+            <Button style={isActive(location, "/add-appointment")}>Book Appointment
+            </Button>
           </Link>
           <Button color="inherit" onClick={() => {
                auth.clearJWT(() => navigate('/'));
             }}>Sign out</Button>
         </span>)
-      } */}
+      }
     </Toolbar>
   </AppBar>
 );
