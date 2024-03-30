@@ -5,10 +5,9 @@ import Menu from './core/Menu'
 import Signup from "./user/Signup.jsx";
 import Signin from './signin/Signin.jsx'
 import PrivateRoute from './signin/PrivateRoute.jsx'
-import Appointments from './appointment/BookAppointments.jsx'
+import BookAppointments from './appointment/BookAppointments.jsx'
 import AppointmentLanding from './appointment/AppointmentLanding.jsx'
 import ViewAppointment from "./appointment/ViewAppointments.jsx"
-
 
 function MainRouter() {
     return (
@@ -32,13 +31,12 @@ function MainRouter() {
                     path="/add-appointment"
                     element={
                         <PrivateRoute>
-                            <Appointments />
+                            <BookAppointments />
                         </PrivateRoute>
                     }
                 />
-                {/* <Route path="/add-appointment" element={<Appointments />} /> */}
-                {/* <Route path="/schedule" element={<ViewAppointment />} /> */}
-
+                {/* Add Route for Book Appointments Page */}
+                <Route path="/book-appointments" element={<BookAppointments />} />
             </Routes>
         </div>
     );
