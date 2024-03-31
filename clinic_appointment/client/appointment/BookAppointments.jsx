@@ -190,7 +190,7 @@ export default function AddAppointment() {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Link to="/signin">
+          <Link to="/appointments">
             <Button
               color="primary"
               autoFocus
