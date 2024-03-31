@@ -6,7 +6,6 @@ import Signup from "./user/Signup.jsx";
 import Signin from './signin/Signin.jsx'
 import PrivateRoute from './signin/PrivateRoute.jsx'
 import BookAppointments from './appointment/BookAppointments.jsx'
-import AppointmentLanding from './appointment/AppointmentLanding.jsx'
 import ViewAppointment from "./appointment/ViewAppointments.jsx"
 
 function MainRouter() {
@@ -16,11 +15,10 @@ function MainRouter() {
             
             <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/appointments" element={<AppointmentLanding />} />
                 <Route path="/signup" element={<Signup />} />
                 <Route path="/signin" element={<Signin />} />
                 <Route
-                    path="/schedule"
+                    path="/appointments"
                     element={
                         <PrivateRoute>
                             <ViewAppointment />
@@ -28,15 +26,13 @@ function MainRouter() {
                     }
                 />
                 <Route
-                    path="/add-appointment"
+                    path="/book-appointment"
                     element={
                         <PrivateRoute>
                             <BookAppointments />
                         </PrivateRoute>
                     }
                 />
-                {/* Add Route for Book Appointments Page */}
-                <Route path="/book-appointments" element={<BookAppointments />} />
             </Routes>
         </div>
     );
