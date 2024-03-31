@@ -16,7 +16,7 @@ const create = async (user) => {
 
   const list = async (signal) => {
     try {
-        let response = await fetch('/api/schedule/', {
+        let response = await fetch('/api/appointments/', {
             method: 'GET',
             signal: signal,
         })
