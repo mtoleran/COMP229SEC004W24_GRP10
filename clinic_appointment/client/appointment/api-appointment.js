@@ -43,4 +43,20 @@ const read = async (params, credentials, signal) => {
     }
   };
 
-  export {create, list, read};
+  const remove = async (params, credentials) => {
+    try {
+        let response = await fetch('/api/appointments/' + params.appointmentId, {
+            method: 'DELETE',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + credentials.t
+            }
+        })
+        return response.json()
+    } catch (err) {
+        console.log(err)
+    }
+}
+
+  export {create, list, read,remove};

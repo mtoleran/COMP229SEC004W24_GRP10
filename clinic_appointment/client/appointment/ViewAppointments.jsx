@@ -15,6 +15,7 @@ import IconButton from '@material-ui/core/IconButton'
 import Avatar from '@material-ui/core/Avatar'
 import Typography from '@material-ui/core/Typography'
 import ArrowForward from '@material-ui/icons/ArrowForward';
+import DeleteAppointment from './DeleteAppointment.jsx'
 
 const useStyles = makeStyles(theme => ({
     card: {
@@ -57,6 +58,13 @@ export default function ViewAppointments() {
         }
     }, [])
 
+    const removeAppointments = (appoint) => {
+        const updatedAppointments = [...appointments]
+        const index = updatedAppointments.indexOf(appoint)
+        updatedAppointments.splice(index, 1)
+        setList(updatedAppointments)
+    }
+
     const classes = useStyles()
     return (
         <Paper className={classes.root} elevation={4}>
@@ -65,25 +73,28 @@ export default function ViewAppointments() {
             </Typography>
             <List dense>
                 {appointments.map((item, i) => {
-                    return <Link component={RouterLink} to={"/appointment/" + item._id} key={i}>
+                    return <span key={i}>
 
                         <ListItem button>
                             <ListItemAvatar>
                                 <Avatar>
                                 </Avatar>
                             </ListItemAvatar>
-                            <ListItemText 
-                                primary={"Patient Name: " + item.firstName + " " + item.lastName} 
-                                secondary= {"Date: " + item.date + " Time: " + item.time}  
+                            <ListItemText
+                                primary={"Patient Name: " + item.firstName + " " + item.lastName}
+                                secondary={"Date: " + item.date + " Time: " + item.time}
                             />
-                            <ListItemText 
-                                primary={"Procedure: " + item.procedure} 
+                            <ListItemText
+                                primary={"Procedure: " + item.procedure}
                             />
-                            <ListItemText 
-                                primary={"Status: " + item.status} 
+                            <ListItemText
+                                primary={"Status: " + item.status}
                             />
+                            <ListItemSecondaryAction>
+                              <DeleteAppointment appointment={item} onRemove={removeAppointments}/>
+                            </ListItemSecondaryAction>
                         </ListItem>
-                    </Link>
+                    </span>
                 })}
             </List>
         </Paper>
