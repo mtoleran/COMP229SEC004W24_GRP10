@@ -72,5 +72,28 @@ const create = async (user) => {
       console.log(err);
     }
   };
-  export { create, list, read, update, remove };
+  const getUsersByUsertype = async (usertype) => {
+    try {
+      let response = await fetch(`/api/users/usertype/${usertype}`, {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      });
+      if (!response.ok) {
+        throw new Error("Failed to fetch users by usertype");
+      }
+      const data = await response.json();
+      console.log("Fetched users:", data); // Add this line for debugging
+      return data;
+    } catch (err) {
+      console.log(err);
+      throw err;
+    }
+  };
+  
+  
+
+export { create, list, read, update, remove, getUsersByUsertype };
   

@@ -17,7 +17,7 @@ const create = async (req, res) => {
 }
 const list = async (req, res) => {
     try {
-        let users = await User.find().select('name email updated created')
+        let users = await User.find().select('firstName lastName email updated created usertype')
         res.json(users)
     } catch (err) {
         return res.status(400).json({
@@ -40,6 +40,21 @@ const userByID = async (req, res, next, id) => {
         })
     }
 }
+
+const userByUserType = async (req, res) => {
+    const { usertype } = req.params;
+    try {
+        let users = await User.find({ usertype }).select('firstName lastName email updated created usertype');
+        res.json(users);
+    } catch (err) {
+        return res.status(400).json({
+            error: errorHandler.getErrorMessage(err)
+        });
+    }
+}
+
+
+
 const read = (req, res) => {
     req.profile.hashed_password = undefined
     req.profile.salt = undefined
@@ -73,4 +88,5 @@ const remove = async (req, res) => {
         })
     }
 }
-export default { create, userByID, read, list, remove, update }
+
+export default { create, userByID, read, list, remove, update,userByUserType }

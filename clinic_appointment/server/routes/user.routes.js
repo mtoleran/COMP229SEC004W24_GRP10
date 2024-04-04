@@ -12,5 +12,6 @@ router.param("userId", userCtrl.userByID)
 router.route("/api/users/:userId").get(userCtrl.read)
 router.route("/api/users/:userId").put(userCtrl.update)
 router.route("/api/users/:userId").delete(userCtrl.remove)
+router.route("/api/users/usertype/:usertype").get(userCtrl.userByUserType);
 
 export default router
