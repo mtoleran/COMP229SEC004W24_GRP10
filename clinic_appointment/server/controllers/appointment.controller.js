@@ -2,7 +2,16 @@ import Appointment from '../models/appointment.model.js';
 import errorHandler from './error.controller.js';
 
 const create = async (req, res) => { 
-    const appointment = new Appointment(req.body); 
+  const { firstName, lastName, date, time, procedure, dentist } = req.body;
+  const appointment = new Appointment({
+      firstName,
+      lastName,
+      date,
+      time,
+      procedure,
+      dentist,
+      status: 'Pending'
+  });
     try {
         await appointment.save();
         return res.status(200).json({ 
@@ -17,7 +26,7 @@ const create = async (req, res) => {
 };
 
 const list = async (req, res) => { 
-    try {
+try {
         let appointment = await Appointment.find().select('firstName lastName date time procedure dentist status'); 
         res.json(appointment);
     } catch (err) {
