@@ -30,7 +30,8 @@ const AppointmentSchema = new mongoose.Schema({
     },
     status: {
         type: String,
-        trim: true//,required: 'Status is required'
+        trim: true,
+        default: 'Pending'//,required: 'Status is required'
     }
 });
 
