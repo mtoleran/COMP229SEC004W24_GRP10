@@ -1,6 +1,9 @@
 import React, { useState,useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css"
+
 import {
   Card,
   CardContent,
@@ -38,6 +41,22 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(2),
     marginBottom: theme.spacing(1),
   },
+  datePickerField: {
+    width: "100%",
+    marginTop: theme.spacing(2),
+    marginBottom: theme.spacing(1),
+  },
+  customDatePicker: {
+    width: "363px",
+    height: "25px",
+    border: "none",
+    borderBottom: "1px solid #bdbdbd",
+    borderRadius: "0px", 
+    marginTop: theme.spacing(4),
+    marginBottom: theme.spacing(2),
+    fontSize: "16px",
+    marginLeft:"-2px",
+  },
   error: {
     color: "red",
   },
@@ -55,7 +74,7 @@ export default function AddAppointment() {
   const [values, setValues] = useState({
     firstName: "",
     lastName: "",
-    date: "",
+    date: "Select Date",
     time: "Select Time",
     procedure: "",
     dentist: "Select Doctor",
@@ -72,10 +91,12 @@ export default function AddAppointment() {
   };
 
   const clickSubmit = async () => {
+    const formattedDate = selectedDate.toLocaleDateString("en-US");
+  
     const appointment = {
       firstName: values.firstName || undefined,
       lastName: values.lastName || undefined,
-      date: values.date || undefined,
+      date: formattedDate,
       time: values.time || undefined,
       procedure: values.procedure || undefined,
       dentist: values.dentist || undefined,
@@ -87,6 +108,11 @@ export default function AddAppointment() {
         setOpen(true);
       }
     });
+  };
+
+  const [selectedDate, setSelectedDate] = useState(null);
+  const handleDateChange = (date) => {
+    setSelectedDate(date);
   };
 
   AddAppointment.propTypes = {
@@ -106,7 +132,10 @@ export default function AddAppointment() {
   
     fetchDentists();
   }, []);
-  
+
+  const today = new Date();
+  const tomorrow = new Date(today);
+  tomorrow.setDate(tomorrow.getDate() + 1);
 
   return (
     <div>
@@ -132,14 +161,20 @@ export default function AddAppointment() {
             onChange={handleChange("lastName")}
             margin="normal"
           />
-          <TextField
+
+<DatePicker
+            selected={selectedDate}
+            onChange={handleDateChange}
+            dateFormat="MM/dd/YYYY"
             id="date"
             label="Date"
-            className={classes.textField}
-            value={values.date}
-            onChange={handleChange("date")}
+            minDate={tomorrow}
+            value={selectedDate}
             margin="normal"
+            placeholderText="Select Date"
+            className={`${classes.datePickerField} ${classes.customDatePicker}`}
           />
+          
           <Select
             id="time"
             label="Time"
@@ -178,6 +213,7 @@ export default function AddAppointment() {
             onChange={handleChange("procedure")}
             margin="normal"
           />
+          
           <Select
             id="dentist"
             label="Dentist"
