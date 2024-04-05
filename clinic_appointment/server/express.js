@@ -4,20 +4,18 @@ import cookieParser from 'cookie-parser'
 import compress from 'compression'
 import cors from 'cors'
 import helmet from 'helmet'
-import Template from './../template.js'
-//import clinicRoutes from './routes/clinic.routes.js'
 import appointmentRoutes from './routes/appointment.routes.js'
 import userRoutes from "./routes/user.routes.js"
 import authRoutes from "./routes/auth.routes.js"
-
 import path from 'path'
+
 const app = express()
 const CURRENT_WORKING_DIR = process.cwd()
 
 app.use('/dist', express.static(path.join(CURRENT_WORKING_DIR, 'dist')))
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use("/", userRoutes)
+app.use('/', userRoutes)
 app.use('/', authRoutes)
 app.use('/', appointmentRoutes)
 app.use(bodyParser.json())

@@ -205,7 +205,7 @@ export default function Signup() {
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
-                    <Link to="/Signin">
+                    <Link to="/signin">
                         <Button color="primary" autoFocus variant="contained" onClick={handleClose}>
                             Sign In
                         </Button>
