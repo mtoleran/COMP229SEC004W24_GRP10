@@ -7,6 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import dentalclinicImg from './../assets/images/dentalclinic.jpg';
 import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
+import auth from '../signin/auth-helper'
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -20,10 +21,10 @@ const useStyles = makeStyles(theme => ({
     },
     card: {
         width: 'calc(50% - 16px)',
-        maxWidth: '50%', 
+        maxWidth: '50%',
         marginLeft: 50,
     },
-    card2:{
+    card2: {
         padding: theme.spacing(0, 5, 2),
         marginRight: 10,
     },
@@ -37,10 +38,10 @@ const useStyles = makeStyles(theme => ({
     button: {
         margin: theme.spacing(1),
     },
-    texts:{
+    texts: {
         textAlign: 'left',
     },
-    bullets:{
+    bullets: {
         marginLeft: '2em',
     },
 }));
@@ -71,38 +72,44 @@ export default function Home() {
                         </Typography>
                         <br />
                         <Typography className={classes.bullets}>
-                                &bull; <strong>Cleaning</strong>: Keep your teeth and gums healthy with regular professional cleanings.
+                            &bull; <strong>Cleaning</strong>: Keep your teeth and gums healthy with regular professional cleanings.
                         </Typography>
                         <Typography className={classes.bullets}>
-                                &bull;  <strong>Extraction</strong>: Expert extraction services for damaged or problematic teeth.
+                            &bull;  <strong>Extraction</strong>: Expert extraction services for damaged or problematic teeth.
                         </Typography>
                         <Typography className={classes.bullets}>
-                                &bull; <strong>Filling</strong>: Restore your teeth with high-quality fillings for a natural look and feel.
+                            &bull; <strong>Filling</strong>: Restore your teeth with high-quality fillings for a natural look and feel.
                         </Typography>
                         <Typography className={classes.bullets}>
-                                &bull; <strong>And more</strong>: We offer comprehensive dental care to address various dental concerns.
+                            &bull; <strong>And more</strong>: We offer comprehensive dental care to address various dental concerns.
                         </Typography>
                         <br />
                         <Typography>
-                            To schedule an appointment and experience our exceptional dental care services, 
-                            <br/>please log in or sign up below.
+                            To schedule an appointment and experience our exceptional dental care services,
+                            <br />please log in or sign up below.
                         </Typography>
                     </div>
-                    
+
                     <div>
-                        <Link to="/signup"> 
-                            <Button color="primary" variant="contained" className={classes.button}>
-                                Sign-up
-                            </Button>
-                        </Link>
-                        <Link to="/signin">
-                            <Button color="primary" variant="contained" className={classes.button}>
-                                Sign-in
-                            </Button>
-                        </Link>
+                        {
+                            !auth.isAuthenticated() && (<span>
+                                {/* Links to show when not signed in */}
+                                <Link to="/signup">
+                                    <Button color="primary" variant="contained" className={classes.button}>
+                                        Sign-up
+                                    </Button>
+                                </Link>
+                                <Link to="/signin">
+                                    <Button color="primary" variant="contained" className={classes.button}>
+                                        Sign-in
+                                    </Button>
+                                </Link>
+                            </span>)
+                        }
+
                     </div>
                 </Card>
-                
+
             </div>
         </div>
     );

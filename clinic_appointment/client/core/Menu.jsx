@@ -8,7 +8,7 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import logo from './../assets/images/tensoftwarelogo.png';
 
 const isActive = (...paths) => {
-  return paths.some((path) => location.pathname === path) ? { color: '#ff4081' } : { color: '#ffffff' };
+  return paths.some((path) => location.pathname === path) ? { textDecorationLine: 'underline', } : { color: '#ffffff' };
 };
 
 export default function Menu() {
@@ -26,11 +26,6 @@ export default function Menu() {
         {
           !auth.isAuthenticated() && (<span>
             {/* Links to show when not signed in */}
-            <Link to="/">
-              <IconButton aria-label="Home" style={isActive(location, "/")}>
-                <img src={logo} alt="Ten Software Logo" style={{ width: '32px', height: '32px' }} />
-              </IconButton>
-            </Link>
           </span>)
         }
         {
