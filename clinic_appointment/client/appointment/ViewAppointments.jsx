@@ -35,9 +35,13 @@ const useStyles = makeStyles(theme => ({
     },
     title: {
         // Define your title styles here
+        textAlign: "center",
     },
     root: {
         // Define your root styles here
+        maxWidth: 1250,
+        margin: "0 auto",
+        marginTop: theme.spacing(3),
     },
 }));
 
@@ -62,7 +66,7 @@ export default function ViewAppointments() {
             abortController.abort()
         }
     }, [])
-    
+
     const onUpdateAppointment = (appointment) => {
         navigate('/update-appointment', { state: appointment });
     }
