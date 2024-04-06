@@ -84,10 +84,16 @@ export default function Home() {
                             &bull; <strong>And more</strong>: We offer comprehensive dental care to address various dental concerns.
                         </Typography>
                         <br />
-                        <Typography>
-                            To schedule an appointment and experience our exceptional dental care services,
-                            <br />please log in or sign up below.
-                        </Typography>
+                        {
+                            !auth.isAuthenticated() && (<span>
+                                <Typography>
+                                    To schedule an appointment and experience our exceptional dental care services,
+                                    <br />please log in or sign up below.
+                                </Typography>
+
+                            </span>)
+                        }
+
                     </div>
 
                     <div>
