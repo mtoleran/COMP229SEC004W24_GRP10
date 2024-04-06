@@ -8,7 +8,7 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import logo from './../assets/images/tensoftwarelogo.png';
 
 const isActive = (...paths) => {
-  return paths.some((path) => location.pathname === path) ? { textDecorationLine: 'underline', } : { color: '#ffffff' };
+  return paths.some((path) => location.pathname === path) ? { textDecorationLine: 'underline', color: '#673147' } : { color: '#ffffff' };
 };
 
 export default function Menu() {
