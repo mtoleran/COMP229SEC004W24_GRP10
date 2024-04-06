@@ -19,6 +19,12 @@ import ArrowForward from '@material-ui/icons/ArrowForward';
 import DeleteAppointment from './DeleteAppointment.jsx'
 import UpdateButton from './components/UpdateButton.jsx'
 import UpdateAppointment from './UpdateAppointment.jsx'
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
 
 const useStyles = makeStyles(theme => ({
     card: {
@@ -35,7 +41,7 @@ const useStyles = makeStyles(theme => ({
     },
     title: {
         // Define your title styles here
-        textAlign: "center",
+        fontWeight: 'bold'
     },
     root: {
         // Define your root styles here
@@ -80,37 +86,37 @@ export default function ViewAppointments() {
 
     const classes = useStyles()
     return (
-        <Paper className={classes.root} elevation={4}>
-            <Typography variant="h6" className={classes.title}>
-                Schedule of Appointments
-            </Typography>
-            <List dense>
-                {appointments.map((item, i) => {
-                    return <span key={i}>
-
-                        <ListItem button>
-                            <ListItemAvatar>
-                                <Avatar>
-                                </Avatar>
-                            </ListItemAvatar>
-                            <ListItemText
-                                primary={"Patient Name: " + item.firstName + " " + item.lastName}
-                                secondary={"Date: " + item.date + " Time: " + item.time}
-                            />
-                            <ListItemText
-                                primary={"Procedure: " + item.procedure}
-                            />
-                            <ListItemText
-                                primary={"Status: " + item.status}
-                            />
-                            <ListItemSecondaryAction>
-                              <UpdateButton appointment={item} onUpdateAppointment={onUpdateAppointment} />
-                              <DeleteAppointment appointment={item} onRemove={removeAppointments}/>
-                            </ListItemSecondaryAction>
-                        </ListItem>
-                    </span>
-                })}
-            </List>
-        </Paper>
-    )
+        <TableContainer className={classes.root} component={Paper}>
+          <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
+            <TableHead>
+              <TableRow >
+                <TableCell style = {{fontWeight: 'bold',textAlign: 'center'}}>Patient Name</TableCell>
+                <TableCell style = {{fontWeight: 'bold',textAlign: 'center'}}>Date & Time</TableCell>
+                <TableCell style = {{fontWeight: 'bold',textAlign: 'center'}}>Procedure</TableCell>
+                <TableCell style = {{fontWeight: 'bold',textAlign: 'center'}}>Status</TableCell>
+                <TableCell align="center"style = {{fontWeight: 'bold',textAlign: 'center'}}>Actions</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {appointments.map((item, i) => (
+                <TableRow
+                  key={i}
+                  sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                >
+                  <TableCell component="th" scope="row" align="center">
+                  {item.firstName + " " + item.lastName}
+                  </TableCell>
+                  <TableCell align="center">{"Date: " + item.date + " Time: " + item.time}</TableCell>
+                  <TableCell align="center">{item.procedure}</TableCell>
+                  <TableCell align="center">{item.status}</TableCell>
+                  <TableCell align="center">
+                    <UpdateButton appointment={item} onUpdateAppointment={onUpdateAppointment} />
+                    <DeleteAppointment appointment={item} onRemove={removeAppointments}/>
+                    </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      );
 }
