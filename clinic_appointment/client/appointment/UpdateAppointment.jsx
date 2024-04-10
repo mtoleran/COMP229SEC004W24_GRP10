@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Link, useLocation } from "react-router-dom";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css"
 import {
   Card,
   CardContent,
@@ -38,6 +40,22 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     marginTop: theme.spacing(2),
     marginBottom: theme.spacing(1),
+  },
+  datePickerField: {
+    width: "100%",
+    marginTop: theme.spacing(2),
+    marginBottom: theme.spacing(1),
+  },
+  customDatePicker: {
+    width: "363px",
+    height: "25px",
+    border: "none",
+    borderBottom: "1px solid #bdbdbd",
+    borderRadius: "0px", 
+    marginTop: theme.spacing(4),
+    marginBottom: theme.spacing(2),
+    fontSize: "16px",
+    marginLeft:"-2px",
   },
   error: {
     color: "red",
@@ -77,10 +95,12 @@ export default function UpdateAppointment() {
   };
 
   const onSubmit = async () => {
+    const formattedDate = selectedDate.toLocaleDateString("en-US");
+    
     const appointment = {
       firstName: values.firstName || undefined,
       lastName: values.lastName || undefined,
-      date: values.date || undefined,
+      date: formattedDate,
       time: values.time || undefined,
       procedure: values.procedure || undefined,
       dentist: values.dentist || undefined,
@@ -95,6 +115,12 @@ export default function UpdateAppointment() {
         setOpen(true);
       }
     });
+  };
+
+  const [selectedDate, setSelectedDate] = useState(null);
+  const handleDateChange = (date) => {
+    console.log("Jasper --> " + date);
+    setSelectedDate(date);
   };
 
   UpdateAppointment.propTypes = {
@@ -114,6 +140,10 @@ export default function UpdateAppointment() {
   
     fetchDentists();
   }, []);
+
+  const today = new Date();
+  const tomorrow = new Date(today);
+  tomorrow.setDate(tomorrow.getDate() + 1);
 
   return (
     <div>
@@ -139,13 +169,17 @@ export default function UpdateAppointment() {
             onChange={handleChange("lastName")}
             margin="normal"
           />
-          <TextField
-            id="date"
+          <DatePicker
             label="Date"
-            className={classes.textField}
-            value={values.date}
-            onChange={handleChange("date")}
+            selected={selectedDate}
+            onChange={handleDateChange}
+            dateFormat="MM/dd/YYYY"
+            id="date"
+            minDate={tomorrow}
+            value={selectedDate || values.date}
             margin="normal"
+            placeholderText="Select Date"
+            className={`${classes.datePickerField} ${classes.customDatePicker}`}
           />
           <Select
             id="time"
