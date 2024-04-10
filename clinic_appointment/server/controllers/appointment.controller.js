@@ -54,11 +54,11 @@ const deleteAppointmentById = async (req, res) => {
 
 const updateAppointmentById = async (req, res) => {
     const appointmentId = req.params.id;
-    const { firstName, lastName, date, time, procedure, dentist } = req.body;
+    const { firstName, lastName, date, time, procedure, dentist, status } = req.body;
   
     try {
         const updatedAppointment = await Appointment.findByIdAndUpdate(appointmentId,
-          {  firstName, lastName, date, time, procedure, dentist  },
+          {  firstName, lastName, date, time, procedure, dentist, status  },
           { new: true }
         );
     
