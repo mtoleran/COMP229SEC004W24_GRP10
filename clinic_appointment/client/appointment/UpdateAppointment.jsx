@@ -81,6 +81,7 @@ export default function UpdateAppointment() {
     time: state.time,
     procedure: state.procedure,
     dentist: state.dentist,
+    status: state.status,
   });
 
   const [open, setOpen] = useState(false);
@@ -95,7 +96,12 @@ export default function UpdateAppointment() {
   };
 
   const onSubmit = async () => {
-    const formattedDate = selectedDate.toLocaleDateString("en-US");
+    var formattedDate = {};
+    if (Object.is(selectedDate, null)){
+      formattedDate = values.date;
+    } else {
+      formattedDate = selectedDate.toLocaleDateString("en-US");
+    }
     
     const appointment = {
       firstName: values.firstName || undefined,
@@ -104,6 +110,7 @@ export default function UpdateAppointment() {
       time: values.time || undefined,
       procedure: values.procedure || undefined,
       dentist: values.dentist || undefined,
+      status: values.status || undefined,
     };
     update(
       { appointmentId: state._id, appointment },
@@ -119,7 +126,7 @@ export default function UpdateAppointment() {
 
   const [selectedDate, setSelectedDate] = useState(null);
   const handleDateChange = (date) => {
-    console.log("Jasper --> " + date);
+    console.log("Jasper Pogi --> " + date);
     setSelectedDate(date);
   };
 
@@ -242,6 +249,30 @@ export default function UpdateAppointment() {
                 {dentist.firstName} {dentist.lastName}
               </MenuItem>
             ))}
+          </Select>
+          <Select
+            id="status"
+            label="Status"
+            value={values.status}
+            onChange={handleChange("status")}
+            className={classes.selectField}
+            margin="normal"
+            renderValue={(selected) => (
+              <ListItemText
+                primary={selected}
+                style={{
+                  color: selected === "Select Status" ? "#757575" : "#000000",
+                  textAlign: "left",
+                }}
+              />
+            )}
+          >
+            <MenuItem value="Select Status" disabled>
+              Select Status
+            </MenuItem>
+            <MenuItem value="Pending">Pending</MenuItem>
+            <MenuItem value="Complete">Complete</MenuItem>
+            <MenuItem value="Cancelled">Cancelled</MenuItem>
           </Select>
         </CardContent>
         <CardActions>
