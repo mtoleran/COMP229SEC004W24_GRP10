@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Link, useLocation } from "react-router-dom";
 import {
@@ -20,6 +20,7 @@ import {
 import PropTypes from "prop-types";
 import { update } from "./api-appointment";
 import auth from '../signin/auth-helper.js'
+import { getUsersByUsertype } from "./../user/api-user";
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -65,6 +66,7 @@ export default function UpdateAppointment() {
   });
 
   const [open, setOpen] = useState(false);
+  const [dentists, setDentists] = useState([]);
 
   const handleChange = (name) => (event) => {
     setValues({ ...values, [name]: event.target.value });
@@ -99,6 +101,19 @@ export default function UpdateAppointment() {
     open: PropTypes.bool.isRequired,
     handleClose: PropTypes.func.isRequired,
   };
+
+  useEffect(() => {
+    const fetchDentists = async () => {
+      try {
+        const response = await getUsersByUsertype("dentist");
+        setDentists(response); 
+      } catch (error) {
+        console.log(error);
+      }
+    };
+  
+    fetchDentists();
+  }, []);
 
   return (
     <div>
@@ -170,14 +185,30 @@ export default function UpdateAppointment() {
             onChange={handleChange("procedure")}
             margin="normal"
           />
-          <TextField
+          
+          <Select
             id="dentist"
             label="Dentist"
-            className={classes.textField}
             value={values.dentist}
             onChange={handleChange("dentist")}
+            className={classes.selectField}
             margin="normal"
-          />
+            renderValue={(selected) => (
+              <ListItemText
+                primary={selected}
+                style={{
+                  color: selected === "Select Doctor" ? "#757575" : "#000000",
+                  textAlign: "left",
+                }}
+              />
+            )}
+          >
+            {dentists.map((dentist) => (
+              <MenuItem key={dentist._id} value={`${dentist.firstName} ${dentist.lastName}`}>
+                {dentist.firstName} {dentist.lastName}
+              </MenuItem>
+            ))}
+          </Select>
         </CardContent>
         <CardActions>
           <Button
